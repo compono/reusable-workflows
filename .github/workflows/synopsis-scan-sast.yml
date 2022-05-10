@@ -10,9 +10,6 @@ on:
       POLARIS_SERVER_URL:
         required: true
         type: string
-      POLARIS_ACCESS_TOKEN:
-        required: true
-        type: string
     #   PROJECT_NAME:
     #     required: true
     #     type: string
