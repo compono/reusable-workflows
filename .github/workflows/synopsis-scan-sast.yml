@@ -1,4 +1,4 @@
-name: "Synopsys Security Scan (SCA)"
+name: "Synopsys Security Scan (SAST)"
 
 on:
   workflow_call:
