@@ -10,19 +10,6 @@ on:
       POLARIS_SERVER_URL:
         required: true
         type: string
-    #   PROJECT_NAME:
-    #     required: true
-    #     type: string
-    #   APPLICATION_NAME:
-    #     required: true
-    #     type: string
-    #   POLICY_NAME:
-    #     required: true
-    #     type: string
-    #   SCAN_TYPE:
-    #     required: false
-    #     type: string
-    #     default: RAPID
     secrets:
       POLARIS_ACCESS_TOKEN:
         required: true
