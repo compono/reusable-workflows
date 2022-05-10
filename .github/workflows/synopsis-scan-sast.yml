@@ -26,6 +26,8 @@ on:
     secrets:
       POLARIS_ACCESS_TOKEN:
         required: true
+      NPM_TOKEN:
+        required: true
     
 jobs:
   security:
@@ -53,6 +55,7 @@ jobs:
         export POLARIS_SERVER_URL=${{ inputs.POLARIS_SERVER_URL }}
         export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_ACCESS_TOKEN }}
         export GIT_BRANCH=${{ github.head_ref }}
+        export NPM_TOKEN=${{ secrets.NPM_TOKEN }}
         chmod +x ./polaris_cli-linux64-2022.3.0/bin/polaris
         ./polaris_cli-linux64-2022.3.0/bin/polaris analyze -w --coverity-ignore-capture-failure	-- npm ci && make build
         cat /home/runner/work/admin-ui/admin-ui/polaris.yml
