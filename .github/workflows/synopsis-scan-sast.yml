@@ -45,7 +45,7 @@ jobs:
 
     - name: Execute the Synopys Detect script
       run: |
-        curl -L ${{ inputs.POLARIS_DOWNLOAD_URL }}" -o polaris_cli.zip
+        curl -L ${{ inputs.POLARIS_DOWNLOAD_URL }} -o polaris_cli.zip
         unzip polaris_cli.zip -d ${HOME}
         echo "${HOME}/polaris_cli-linux64-2022.3.0/bin >> $GITHUB_PATH
         polaris --version
