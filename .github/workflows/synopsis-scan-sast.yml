@@ -7,6 +7,12 @@ on:
         required: false
         type: string
         default: https://compono.polaris.synopsys.com/api/tools/v2/downloads/polaris_cli-linux64-2022.3.0.zip
+      POLARIS_SERVER_URL:
+        required: true
+        type: string
+      POLARIS_ACCESS_TOKEN:
+        required: true
+        type: string
     #   PROJECT_NAME:
     #     required: true
     #     type: string
@@ -48,4 +54,5 @@ jobs:
         curl -L ${{ inputs.POLARIS_DOWNLOAD_URL }} -o polaris_cli.zip
         unzip polaris_cli.zip
         cd ./polaris_cli-linux64-2022.3.0/bin
-        ./polaris --version
+        polaris analyse -w
+# ./polaris --server-url ${{ inputs.POLARIS_DOWNLOAD_URL }}
