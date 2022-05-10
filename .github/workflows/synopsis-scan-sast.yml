@@ -44,4 +44,4 @@ jobs:
 
     - name: Execute the Synopys Detect script
       run: |
-        bash <(curl -s -L https://detect.synopsys.com/detect7.sh --polaris.access.token=${{ secrets.POLARIS_ACCESS_TOKEN }})
+        bash <(curl -s -L https://detect.synopsys.com/detect7.sh) --polaris.access.token=${{ secrets.POLARIS_ACCESS_TOKEN }}
