@@ -34,14 +34,12 @@ jobs:
 
     - name: Print workflow input variables
       run: |
-        echo "Input BLACKDUCK_URL:         ${{ github.event.inputs.BLACKDUCK_URL }}"
-        echo "Input PROJECT_NAME:          ${{ github.event.inputs.PROJECT_NAME }}"
-        echo "Input APPLICATION_NAME:      ${{ github.event.inputs.APPLICATION_NAME }}"
-        echo "Input POLICY_NAME:           ${{ github.event.inputs.POLICY_NAME }}"
-        echo "Input SCAN_TYPE:             ${{ github.event.inputs.SCAN_TYPE }}"
-        echo "Secret BLACKDUCK_API_TOKEN:  ${{ github.event.inputs.BLACKDUCK_URL }}"
-
-
+        echo "Input BLACKDUCK_URL:         ${{ inputs.BLACKDUCK_URL }}"
+        echo "Input PROJECT_NAME:          ${{ inputs.PROJECT_NAME }}"
+        echo "Input APPLICATION_NAME:      ${{ inputs.APPLICATION_NAME }}"
+        echo "Input POLICY_NAME:           ${{ inputs.POLICY_NAME }}"
+        echo "Input SCAN_TYPE:             ${{ inputs.SCAN_TYPE }}"
+        echo "Secret BLACKDUCK_API_TOKEN:  ${{ secrets.BLACKDUCK_API_TOKEN }}
 
     - name: Set up JDK 11
       uses: actions/setup-java@v2
@@ -52,16 +50,16 @@ jobs:
     - name: Create Black Duck Policy
       uses: blackducksoftware/create-policy-action@v0.0.1
       with:
-        blackduck-url: ${{ github.event.inputs.BLACKDUCK_URL }}
+        blackduck-url: ${{ inputs.BLACKDUCK_URL }}
         blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-        policy-name: ${{ github.event.inputs.POLICY_NAME }}
+        policy-name: ${{ inputs.POLICY_NAME }}
         no-fail-if-policy-exists: true
 
     - name: Run Synopsys Detect
       uses: synopsys-sig/detect-action@v0.3.2
       with:
-        scan-mode: ${{ github.event.inputs.SCAN_TYPE }}
+        scan-mode: ${{ inputs.SCAN_TYPE }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         detect-version: 7.9.0
-        blackduck-url: ${{ github.event.inputs.BLACKDUCK_URL }}
+        blackduck-url: ${{ inputs.BLACKDUCK_URL }}
         blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
