@@ -17,7 +17,7 @@ on:
       CLEAN_COMMAND:
         required: false
         type: string
-        default: "make clean"
+        default: "make,clean"
     secrets:
       POLARIS_ACCESS_TOKEN:
         required: true
