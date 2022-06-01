@@ -12,9 +12,6 @@ on:
       APPLICATION_NAME:
         required: true
         type: string
-      POLICY_NAME:
-        required: true
-        type: string
       SCAN_TYPE:
         required: false
         type: string
@@ -32,28 +29,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Print workflow input variables
-      run: |
-        echo "Input BLACKDUCK_URL:         ${{ inputs.BLACKDUCK_URL }}"
-        echo "Input PROJECT_NAME:          ${{ inputs.PROJECT_NAME }}"
-        echo "Input APPLICATION_NAME:      ${{ inputs.APPLICATION_NAME }}"
-        echo "Input POLICY_NAME:           ${{ inputs.POLICY_NAME }}"
-        echo "Input SCAN_TYPE:             ${{ inputs.SCAN_TYPE }}"
-        echo "Secret BLACKDUCK_API_TOKEN:  ${{ secrets.BLACKDUCK_API_TOKEN }}"
-
     - name: Set up JDK 11
       uses: actions/setup-java@v2
       with:
         java-version: '11'
         distribution: 'adopt'
-
-    # - name: Create Black Duck Policy
-    #   uses: blackducksoftware/create-policy-action@v0.0.1
-    #   with:
-    #     blackduck-url: ${{ inputs.BLACKDUCK_URL }}
-    #     blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
-    #     policy-name: ${{ inputs.POLICY_NAME }}
-    #     no-fail-if-policy-exists: true
 
     - name: Run Synopsys Detect
       uses: synopsys-sig/detect-action@v0.3.2
