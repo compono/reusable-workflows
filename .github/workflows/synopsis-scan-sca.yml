@@ -37,6 +37,8 @@ jobs:
 
     - name: Run Synopsys Detect
       uses: synopsys-sig/detect-action@v0.3.2
+      env:
+        DETECT_PROJECT_GROUP_NAME: ${{ inputs.APPLICATION_NAME }}
       with:
         scan-mode: ${{ inputs.SCAN_TYPE }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
