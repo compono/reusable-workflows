@@ -10,6 +10,14 @@ on:
       POLARIS_SERVER_URL:
         required: true
         type: string
+      BUILD_COMMAND:
+        required: false
+        type: string
+        default: "make build"
+      CLEAN_COMMAND:
+        required: false
+        type: string
+        default: "make clean"
     secrets:
       POLARIS_ACCESS_TOKEN:
         required: true
@@ -47,13 +55,5 @@ jobs:
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
         echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
         chmod +x ./polaris_cli-linux64-2022.3.0/bin/polaris
-        ./polaris_cli-linux64-2022.3.0/bin/polaris analyze -w --coverity-ignore-capture-failure	-- npm ci && make build
+        ./polaris_cli-linux64-2022.3.0/bin/polaris --co capture.build.cleanCommands="[{shell:[${{ inputs.CLEAN_COMMAND }}]}]" analyze -w --coverity-ignore-capture-failure	-- ${{ inputs.BUILD_COMMAND }}
         cat /home/runner/work/admin-ui/admin-ui/polaris.yml
-
-
-#     $ curl -X POST \
-# https://subdomain.polaris.synopsys.com/api/auth/v1/authenticate \
-# -H 'Accept: application/json' \
-# -H 'Content-Type: application/x-www-form-urlencoded' \
-# -d accesstoken={insert api token}
-            
