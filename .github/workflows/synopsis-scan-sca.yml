@@ -1,0 +1,47 @@
+name: "Synopsys Security Scan (SCA)"
+
+on:
+  workflow_call:
+    inputs:
+      BLACKDUCK_URL:
+        required: true
+        type: string
+      PROJECT_NAME:
+        required: true
+        type: string
+      APPLICATION_NAME:
+        required: true
+        type: string
+      SCAN_TYPE:
+        required: false
+        type: string
+        default: RAPID
+    secrets:
+      BLACKDUCK_API_TOKEN:
+        required: true
+    
+jobs:
+  security:
+    name: Synopsys Security Scan (SCA)
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+
+    - name: Run Synopsys Detect
+      uses: synopsys-sig/detect-action@v0.3.2
+      env:
+        DETECT_PROJECT_GROUP_NAME: ${{ inputs.APPLICATION_NAME }}
+      with:
+        scan-mode: ${{ inputs.SCAN_TYPE }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        detect-version: 7.9.0
+        blackduck-url: ${{ inputs.BLACKDUCK_URL }}
+        blackduck-api-token: ${{ secrets.BLACKDUCK_API_TOKEN }}
