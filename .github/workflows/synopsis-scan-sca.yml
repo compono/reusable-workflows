@@ -16,6 +16,10 @@ on:
         required: false
         type: string
         default: RAPID
+      SCAN_DEPTH:
+        required: false
+        type: string
+        default: "0"
     secrets:
       BLACKDUCK_API_TOKEN:
         required: true
@@ -39,6 +43,7 @@ jobs:
       uses: synopsys-sig/detect-action@v0.3.2
       env:
         DETECT_PROJECT_GROUP_NAME: ${{ inputs.APPLICATION_NAME }}
+        DETECT_DETECTOR_SEARCH_DEPTH: ${{ inputs.SCAN_DEPTH }}
       with:
         scan-mode: ${{ inputs.SCAN_TYPE }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
