@@ -49,6 +49,6 @@ jobs:
         export POLARIS_ACCESS_TOKEN=${{ secrets.POLARIS_ACCESS_TOKEN }}
         export GIT_BRANCH=${{ github.head_ref }}
         echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_TOKEN }}" >> ~/.npmrc
+        echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_PACKAGES_AUTH_TOKEN }}" >> ~/.npmrc
         chmod +x ./polaris_cli-linux64-2022.3.0/bin/polaris
         ./polaris_cli-linux64-2022.3.0/bin/polaris --co capture.build.cleanCommands="[{shell:[${{ inputs.CLEAN_COMMAND }}]}]" analyze -w --coverity-ignore-capture-failure	-- ${{ inputs.BUILD_COMMAND }}
