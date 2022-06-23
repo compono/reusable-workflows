@@ -23,6 +23,8 @@ on:
         required: true
       NPM_TOKEN:
         required: true
+      NODE_AUTH_TOKEN:
+        required: true
       GH_PACKAGES_TOKEN:
         required: true
     
