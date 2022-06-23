@@ -45,7 +45,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.15.0'
-        token: ${{ secrets.NPM_TOKEN }}
         always-auth: true
 
     - name: Execute the Synopys Detect script
