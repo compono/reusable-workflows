@@ -40,11 +40,17 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    
-    - name: Setup Node.JS 16
+
+    - name: Read .tool-versions
+      run: |
+        export NODE_VERSION=`cat .tool-versions | sed -n 's/nodejs //p'`
+        export NODE_VERSION="${NODE_VERSION:-16.15.0}"
+        echo NODE_VERSION=$NODE_VERSION >> $GITHUB_ENV
+
+    - name: Setup NodeJS
       uses: actions/setup-node@v3
       with:
-        node-version: '16.15.0'
+        node-version: ${{ env.NODE_VERSION }}
 
     - name: Execute the Synopys Detect script
       run: |
